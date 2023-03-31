@@ -25,10 +25,33 @@ form.addEventListener('submit', (e) => {
     const nome = e.target.elements['nome'];
     const quantidade = e.target.elements['quantidade'];
     
+    const itemAtual = {
+        nome: nome.value,
+        quantidade: quantidade.value
+    }
     
-    const itemAtual = atualizaLocalStorage(nome.value,quantidade.value);
+    const existe = itens.find(element => element.nome === nome.value);
+    console.log(existe);
+
+    if(existe)
+    {
+        //se já existe já tem o id que foi passado como length
+        itemAtual.id = existe.id;
+        atualizaElemento(itemAtual);
+    }
+    else
+    {
+        itemAtual.id = itens.length;
+        criaElemento(itemAtual);
+        itens.push(itemAtual);
+    }
+
+
     //criaElemento(nome.value,quantidade.value);
-    criaElemento(itemAtual);
+   
+
+    
+    localStorage.setItem('itens' , JSON.stringify(itens));
     nome.value = '';
     quantidade.value = '';
 
@@ -36,12 +59,14 @@ form.addEventListener('submit', (e) => {
 
 
 function criaElemento(item){
+
+
     const novoItem = document.createElement('li');
     novoItem.classList.add('item');
 
     const numeroItem = document.createElement('strong');
     numeroItem.innerHTML = item.quantidade;
-
+    numeroItem.dataset.id = item.id;
     //console.log(numeroItem);
 
     novoItem.appendChild(numeroItem);
@@ -55,14 +80,6 @@ function criaElemento(item){
 }
 
 
-function atualizaLocalStorage(nome, quantidade){
-    const itemAtual = {
-        nome: nome,
-        quantidade: quantidade
-    }
-    
-    itens.push(itemAtual);
-    localStorage.setItem('itens' , JSON.stringify(itens));
-
-    return itemAtual;
+function atualizaElemento(item){
+    document.querySelector('[data-id="' + item.id + '"]').textContent = item.quantidade;
 }
