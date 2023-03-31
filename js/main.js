@@ -10,9 +10,12 @@ form.addEventListener('submit', (e) => {
     //console.log(e.target.elements);
     //console.log(e.target.elements['nome'].value);
     //console.log(e.target.elements['quantidade'].value);
-    const nome = e.target.elements['nome'].value;
-    const quantidade = e.target.elements['quantidade'].value;
-    criaElemento(nome,quantidade);
+    const nome = e.target.elements['nome'];
+    const quantidade = e.target.elements['quantidade'];
+    criaElemento(nome.value,quantidade.value);
+
+    nome.value = '';
+    quantidade.value = '';
 
 });
 
