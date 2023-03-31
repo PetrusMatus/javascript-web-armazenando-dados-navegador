@@ -38,6 +38,8 @@ form.addEventListener('submit', (e) => {
         //se já existe já tem o id que foi passado como length
         itemAtual.id = existe.id;
         atualizaElemento(itemAtual);
+
+        itens[existe.id] = itemAtual;
     }
     else
     {
