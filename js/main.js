@@ -34,6 +34,9 @@ function criaElemento(nome, quantidade){
 
     //console.log(novoItem);
     lista.appendChild(novoItem);
+
+    localStorage.setItem('nome' , nome);
+    localStorage.setItem('quantidade' , quantidade);
 }
 
 
