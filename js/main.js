@@ -2,11 +2,11 @@ const form = document.getElementById('novoItem');
 const lista = document.getElementById('lista');
 //const itens = [];
 const itens = JSON.parse(localStorage.getItem('itens')) || [];
-console.log(JSON.parse(localStorage.getItem('itens')));
+//console.log(JSON.parse(localStorage.getItem('itens')));
 
 itens.forEach( (element) => {
-    console.log(element.nome);
-    console.log(element.quantidade);
+    //console.log(element.nome);
+    //console.log(element.quantidade);
     //criaElemento(element.nome,element.quantidade);
     criaElemento(element);
 })
@@ -31,7 +31,7 @@ form.addEventListener('submit', (e) => {
     }
     
     const existe = itens.find(element => element.nome === nome.value);
-    console.log(existe);
+    //console.log(existe);
 
     if(existe)
     {
@@ -39,20 +39,16 @@ form.addEventListener('submit', (e) => {
         itemAtual.id = existe.id;
         atualizaElemento(itemAtual);
 
-        itens[existe.id] = itemAtual;
+        //itens[existe.id] = itemAtual;
+        itens[itens.findIndex(elemento => elemento.id === existe.id)] = itemAtual;
     }
     else
     {
-        itemAtual.id = itens.length;
+        itemAtual.id = itens[itens.length - 1] ? (itens[itens.length - 1]).id + 1 : 0;
         criaElemento(itemAtual);
         itens.push(itemAtual);
     }
 
-
-    //criaElemento(nome.value,quantidade.value);
-   
-
-    
     localStorage.setItem('itens' , JSON.stringify(itens));
     nome.value = '';
     quantidade.value = '';
@@ -102,6 +98,7 @@ function botaoApagar(id){
 function apagarElemento(tag, id){
     tag.remove();
     //console.log(id);
+
     itens.splice(
         itens.findIndex(elemento => elemento.id === id),
         1
