@@ -15,6 +15,9 @@ form.addEventListener('submit', (e) => {
 
     //ADICIONAR VALORES À UL #lista
     adicionarListagem(e.target.elements['nome'].value,e.target.elements['quantidade'].value);
+
+    //ADICIONAR VALORES À localStorage
+    adicionarLocalStorage(e.target.elements['nome'].value,e.target.elements['quantidade'].value);
 });
 
 function adicionarListagem(nome, quantidade){
@@ -43,6 +46,27 @@ function adicionarListagem(nome, quantidade){
     lista.append(li);
 
     //console.log(li);
+}
+
+
+
+
+const itens = JSON.parse(localStorage.getItem('itens')) || [];
+//const itens = [];
+
+function adicionarLocalStorage(nome, quantidade){
+    
+    //OBJECTO itemATual
+    const itemAtual = {
+        nome: nome,
+        quantidade, quantidade
+    }
+
+    //ADICIONAR OBJECTO AO ARRAY ITENS
+    itens.push(itemAtual);
+
+    //ADICIONAR O ARRAY COM TODOS OS OBJECTOS PARA O localStorage
+    localStorage.setItem('itens', JSON.stringify(itens));
 }
 
 
