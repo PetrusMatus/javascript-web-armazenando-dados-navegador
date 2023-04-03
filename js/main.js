@@ -74,6 +74,7 @@ function criaElemento(item){
     novoItem.appendChild(numeroItem);
     novoItem.innerHTML += item.nome;
 
+    novoItem.appendChild(botaoApagar());
     //console.log(novoItem);
     lista.appendChild(novoItem);
 
@@ -84,4 +85,23 @@ function criaElemento(item){
 
 function atualizaElemento(item){
     document.querySelector('[data-id="' + item.id + '"]').textContent = item.quantidade;
+}
+
+
+function botaoApagar(){
+    const elementoBotao = document.createElement('button');
+    elementoBotao.innerText = 'x';
+
+    elementoBotao.addEventListener('click', function() {
+        apagarElemento(this);
+    });
+    return elementoBotao;
+}
+
+function apagarElemento(tag){
+    
+    const elementoPai = tag.parentNode;
+    console.log(elementoPai);
+    
+    elementoPai.remove();
 }
