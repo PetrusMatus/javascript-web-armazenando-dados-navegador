@@ -42,6 +42,13 @@ function adicionarListagem(nome, quantidade){
     //HTML DA LI IGUAL AO QUE JÀ ESTAVA + NOME
     li.innerHTML += nome;
 
+    //CRIAR TAG BUTTON
+    const botao = document.createElement('button');
+    botao.innerText = 'x';
+
+    //ADICIONAR BUTTON À LI
+    li.appendChild(botao);
+
     //ADCIONAR LI À UL
     lista.append(li);
 
