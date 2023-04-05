@@ -13,11 +13,20 @@ form.addEventListener('submit', (e) => {
     console.log(e.target.elements['nome'].value);
     console.log(e.target.elements['quantidade'].value);
 
-    //ADICIONAR VALORES À UL #lista
-    adicionarListagem(e.target.elements['nome'].value,e.target.elements['quantidade'].value);
 
-    //ADICIONAR VALORES À localStorage
-    adicionarLocalStorage(e.target.elements['nome'].value,e.target.elements['quantidade'].value);
+    //find objecto com o mesmo nome
+    const adicionadoAnteriormente = itens.find(item => item.nome === e.target.elements['nome'].value);
+    
+    
+    if(adicionadoAnteriormente)
+        console.log('atualizar');
+    else{
+        //ADICIONAR VALORES À UL #lista
+        adicionarListagem(e.target.elements['nome'].value,e.target.elements['quantidade'].value);
+    }
+        
+    //ADICIONAR/ATUALIZAR VALORES À localStorage
+    adicionarLocalStorage(e.target.elements['nome'].value,e.target.elements['quantidade'].value,adicionadoAnteriormente);
 });
 
 function adicionarListagem(nome, quantidade){
@@ -66,16 +75,36 @@ function adicionarListagem(nome, quantidade){
 const itens = JSON.parse(localStorage.getItem('itens')) || [];
 //const itens = [];
 
-function adicionarLocalStorage(nome, quantidade){
+function adicionarLocalStorage(nome, quantidade,adicionadoAnteriormente){
     
     //OBJECTO itemATual
     const itemAtual = {
+        //id: itens.length,
         nome: nome,
         quantidade, quantidade
     }
 
-    //ADICIONAR OBJECTO AO ARRAY ITENS
-    itens.push(itemAtual);
+    //const adicionadoAnteriormente = itens.find(item => item.nome === nome);
+    let id = 0;
+
+    if(adicionadoAnteriormente){
+        id = adicionadoAnteriormente.id;
+        itemAtual.id = id;
+
+        itens[itens.findIndex(item => item.id === id)].quantidade = quantidade;
+
+    }
+    else{
+        //ADICIONAR OBJECTO AO ARRAY ITENS
+        id = itens.length;
+        itemAtual.id = id;
+        itens.push(itemAtual);
+    }
+   
+
+    console.log(itemAtual);
+
+    
 
     //ADICIONAR O ARRAY COM TODOS OS OBJECTOS PARA O localStorage
     localStorage.setItem('itens', JSON.stringify(itens));
