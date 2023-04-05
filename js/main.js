@@ -77,3 +77,6 @@ function adicionarLocalStorage(nome, quantidade){
 }
 
 
+itens.forEach(element => {
+    adicionarListagem(element.nome,element.quantidade);
+});
