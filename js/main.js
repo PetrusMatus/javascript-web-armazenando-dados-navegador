@@ -46,6 +46,11 @@ function adicionarListagem(nome, quantidade){
     const botao = document.createElement('button');
     botao.innerText = 'x';
 
+    //ADICIONAR EVENTO CLICK AO BUTTON
+    botao.addEventListener('click', (e) => {
+        removerListagemElocalStorage(e.target.parentNode);
+    });
+
     //ADICIONAR BUTTON À LI
     li.appendChild(botao);
 
@@ -80,3 +85,8 @@ function adicionarLocalStorage(nome, quantidade){
 itens.forEach(element => {
     adicionarListagem(element.nome,element.quantidade);
 });
+
+
+function removerListagemElocalStorage(li){
+    li.remove();
+}
