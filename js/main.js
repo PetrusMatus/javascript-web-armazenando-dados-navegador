@@ -7,6 +7,7 @@ const itens = JSON.parse(localStorage.getItem('itens')) || [];
 //ADICIONAR itens DE localStorage À LISTA
 itens.forEach(element => {
     const item = {
+        id: element.id,
         nome: element.nome,
         quantidade: element.quantidade
     }
@@ -27,7 +28,7 @@ form.addEventListener('submit', (e) => {
 
     //VERIFICAR SE O NOME JÁ EXISTE NO localStorage
     const itemNomeExistente = itens.find(element => element.nome === nome.value);
-    let id = 0;
+    
 
     if(itemNomeExistente){ //MANTER ID
         itemAtual.id = itemNomeExistente.id;
@@ -57,6 +58,9 @@ function adicionarListagem(itemAtual){
     const li = document.createElement('li');
     //ADICIONAR ESTILO À LI
     li.classList.add('item');
+
+    //ADICIONAR data-id À LI
+    li.dataset.id = itemAtual.id;
 
     //CRIAR STRONG
     const strong = document.createElement('strong');
