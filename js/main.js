@@ -69,6 +69,14 @@ function adicionarListagem(itemAtual){
     const button = document.createElement('button');
     button.innerText = 'x';
 
+    //ADICIONAR EVENTO CLICK
+    button.addEventListener('click', (e) => {
+        //CAPTAR LI
+        const li = e.target.parentNode;
+        //REMOVER LI
+        li.remove();
+    });
+
     //ADICIONAR BUTOTN À LI
     li.append(button);
 
@@ -81,3 +89,5 @@ function adicionarLocalStorage(itemAtual){
     itens.push(itemAtual);
     localStorage.setItem('itens', JSON.stringify(itens));
 }
+
+
