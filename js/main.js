@@ -4,6 +4,15 @@ const form = document.getElementById('novoItem');
 //Ou localStorage ou ARRAY VAZIO
 const itens = JSON.parse(localStorage.getItem('itens')) || [];
 
+//ADICIONAR itens DE localStorage À LISTA
+itens.forEach(element => {
+    const item = {
+        nome: element.nome,
+        quantidade: element.quantidade
+    }
+    adicionarListagem(item);
+});
+
 //SUBMIT FORM
 form.addEventListener('submit', (e) => {
     e.preventDefault();
