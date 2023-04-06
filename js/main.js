@@ -33,6 +33,7 @@ form.addEventListener('submit', (e) => {
     if(itemNomeExistente){ //MANTER ID
         itemAtual.id = itemNomeExistente.id;
         atualizarQuantidadeListagem(itemAtual);
+        atualizarLocalStorage(itemAtual);
     }
     else{ //CRIAR NOVO ID
         itemAtual.id = itens.length;
@@ -103,4 +104,10 @@ function adicionarLocalStorage(itemAtual){
 
 function atualizarQuantidadeListagem(itemAtual){
     document.querySelector('[data-id="' + itemAtual.id + '"]').getElementsByTagName('strong')[0].textContent = itemAtual.quantidade;
+}
+
+function atualizarLocalStorage(itemAtual){
+    //ENCONTRAR INDEX ONDE O ID FOR IGUAL AO ID itemAtual e NESSA POSIÇÃO ATUALIZAR COM itemAtual
+    itens[itens.findIndex(element => element.id === itemAtual.id)] = itemAtual;
+    localStorage.setItem('itens', JSON.stringify(itens));
 }
