@@ -36,7 +36,9 @@ form.addEventListener('submit', (e) => {
         atualizarLocalStorage(itemAtual);
     }
     else{ //CRIAR NOVO ID
-        itemAtual.id = itens.length;
+        //itemAtual.id = itens.length;
+        //SE JÁ EXISTIR ? MAIOR ID + 1 : 0
+        itemAtual.id = itens[itens.length - 1] ? (itens[itens.length - 1]).id + 1 : 0;
         adicionarListagem(itemAtual);
         adicionarLocalStorage(itemAtual);
     }
