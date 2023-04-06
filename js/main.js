@@ -32,6 +32,7 @@ form.addEventListener('submit', (e) => {
 
     if(itemNomeExistente){ //MANTER ID
         itemAtual.id = itemNomeExistente.id;
+        atualizarQuantidadeListagem(itemAtual);
     }
     else{ //CRIAR NOVO ID
         itemAtual.id = itens.length;
@@ -99,3 +100,7 @@ function adicionarLocalStorage(itemAtual){
     localStorage.setItem('itens', JSON.stringify(itens));
 }
 
+
+function atualizarQuantidadeListagem(itemAtual){
+    document.querySelector('[data-id="' + itemAtual.id + '"]').getElementsByTagName('strong')[0].textContent = itemAtual.quantidade;
+}
