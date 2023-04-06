@@ -85,7 +85,9 @@ function adicionarListagem(itemAtual){
         //REMOVER LI
         li.remove();
 
-        
+        //REMOVER DO localStorage
+        removerLocalStorage(itemAtual);
+
     });
 
     //ADICIONAR BUTOTN À LI
@@ -110,4 +112,18 @@ function atualizarLocalStorage(itemAtual){
     //ENCONTRAR INDEX ONDE O ID FOR IGUAL AO ID itemAtual e NESSA POSIÇÃO ATUALIZAR COM itemAtual
     itens[itens.findIndex(element => element.id === itemAtual.id)] = itemAtual;
     localStorage.setItem('itens', JSON.stringify(itens));
+}
+
+
+
+function removerLocalStorage(itemAtual){
+
+    //REMOVER ELEMENTO DO INDEX ONDE O ID FOR IGUAL AO itemAtual
+    //1 - PORQUE SÓ SE PRETENDE REMOVER 1 ELEMENTO
+    itens.splice(
+        itens.findIndex(element => element.id === itemAtual.id), 1
+    );
+
+    localStorage.setItem('itens',JSON.stringify(itens));
+
 }
