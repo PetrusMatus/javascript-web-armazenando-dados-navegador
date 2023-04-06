@@ -1,5 +1,8 @@
 //FORM
 const form = document.getElementById('novoItem');
+//array local storage
+//Ou localStorage ou ARRAY VAZIO
+const itens = JSON.parse(localStorage.getItem('itens')) || [];
 
 //SUBMIT FORM
 form.addEventListener('submit', (e) => {
@@ -15,6 +18,7 @@ form.addEventListener('submit', (e) => {
 
     
     adicionarListagem(itemAtual);
+    adicionarLocalStorage(itemAtual);
 
 
 
@@ -61,4 +65,10 @@ function adicionarListagem(itemAtual){
 
     lista.appendChild(li);
 
+}
+
+
+function adicionarLocalStorage(itemAtual){
+    itens.push(itemAtual);
+    localStorage.setItem('itens', JSON.stringify(itens));
 }
