@@ -22,18 +22,21 @@ form.addEventListener('submit', (e) => {
 
     const nome = e.target.elements['nome'];
     const quantidade = e.target.elements['quantidade'];
+
     const itemAtual = objectoNovoItemOuAtualizar(nome.value,quantidade.value);
-    console.log(itemAtual);
 
-    
-    adicionarListagem(itemAtual);
-    adicionarLocalStorage(itemAtual);
+    //VERIFICAR SE O NOME JÁ EXISTE NO localStorage
+    const itemNomeExistente = itens.find(element => element.nome === nome.value);
+    let id = 0;
 
-
-
-    //LIMPAR CAMPOS
-    //nome.value = '';
-    //quantidade.value = '';
+    if(itemNomeExistente){ //MANTER ID
+        itemAtual.id = itemNomeExistente.id;
+    }
+    else{ //CRIAR NOVO ID
+        itemAtual.id = itens.length;
+        adicionarListagem(itemAtual);
+        adicionarLocalStorage(itemAtual);
+    }
 
 });
 
@@ -75,6 +78,8 @@ function adicionarListagem(itemAtual){
         const li = e.target.parentNode;
         //REMOVER LI
         li.remove();
+
+        
     });
 
     //ADICIONAR BUTOTN À LI
@@ -89,5 +94,4 @@ function adicionarLocalStorage(itemAtual){
     itens.push(itemAtual);
     localStorage.setItem('itens', JSON.stringify(itens));
 }
-
 
