@@ -13,8 +13,14 @@ form.addEventListener('submit', (e) => {
     const itemAtual = objectoNovoItemOuAtualizar(nome.value,quantidade.value);
     console.log(itemAtual);
 
-    nome.value = '';
-    quantidade.value = '';
+    
+    adicionarListagem(itemAtual);
+
+
+
+    //LIMPAR CAMPOS
+    //nome.value = '';
+    //quantidade.value = '';
 
 });
 
@@ -28,3 +34,31 @@ function objectoNovoItemOuAtualizar(nome,quantidade){
 
 }
 
+function adicionarListagem(itemAtual){
+
+    const lista  = document.getElementById('lista');
+    //CRIAR LI
+    const li = document.createElement('li');
+    //ADICIONAR ESTILO À LI
+    li.classList.add('item');
+
+    //CRIAR STRONG
+    const strong = document.createElement('strong');
+    strong.innerText = itemAtual.quantidade;
+
+    //ADICIONAR STRONG À LI
+    li.append(strong);
+
+    //PEGAR EM TUDO O QUE A LI TEM E ACRESCENTAR O NOME.
+    li.innerHTML += itemAtual.nome;
+
+    //CRIAR BUTTON
+    const button = document.createElement('button');
+    button.innerText = 'x';
+
+    //ADICIONAR BUTOTN À LI
+    li.append(button);
+
+    lista.appendChild(li);
+
+}
